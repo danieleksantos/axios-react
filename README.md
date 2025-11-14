@@ -1,6 +1,6 @@
 
 # 🌐 React + TypeScript + Vite
-=============================
+
 
 Este projeto de estudos é um aplicativo web React desenvolvido em TypeScript que demonstra o uso da biblioteca **Axios** para integrar e consumir dados de três APIs públicas diferentes em um único painel, utilizando `styled-components` para estilização.
 
