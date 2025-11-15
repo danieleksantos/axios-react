@@ -274,3 +274,11 @@ export const DetailGroup = styled.div`
   margin-top: 10px;
   padding: 0 10px;
 `
+export const LoadingMessage = styled.p`
+  font-size: 1.1em;
+  font-weight: 500;
+  color: #888;
+  padding: 15px 0;
+  text-align: center;
+  margin: 10px 0;
+`

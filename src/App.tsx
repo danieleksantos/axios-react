@@ -12,6 +12,7 @@ export function App() {
   const [repositories, setRepositories] = useState<IRepository[]>([])
   const [searchTerm, setSearchTerm] = useState('')
   const [searchAttempted, setSearchAttempted] = useState(false)
+  const [isLoadingRepos, setIsLoadingRepos] = useState(false)
 
   const [countryName, setCountryName] = useState('')
   const [country, setCountry] = useState<ICountry | null>(null)
@@ -55,6 +56,7 @@ export function App() {
     setSearchAttempted(true)
     setRepositories([])
     setSearchTerm('')
+    setIsLoadingRepos(true)
 
     try {
       const responseGithub = await axios.get(
@@ -64,6 +66,8 @@ export function App() {
     } catch (error) {
       console.log('Erro na busca de repositórios:', error)
       setRepositories([])
+    } finally {
+      setIsLoadingRepos(false)
     }
   }
 
@@ -195,7 +199,9 @@ export function App() {
 
         {searchAttempted && (
           <S.ResultsArea>
-            {repositories.length > 0 ? (
+            {isLoadingRepos ? (
+              <S.LoadingMessage>Carregando repositórios...</S.LoadingMessage>
+            ) : repositories.length > 0 ? (
               <>
                 <S.FilterLabel>Filtrar por nome:</S.FilterLabel>
                 <S.Input
@@ -222,7 +228,7 @@ export function App() {
                       </S.RepoLink>
                       {repository.description && (
                         <S.RepoDescription>
-                          {repository.description}
+                          {repository.description || 'Sem descrição'}
                         </S.RepoDescription>
                       )}
                     </S.RepoItem>
